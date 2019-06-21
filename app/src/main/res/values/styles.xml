@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    //Google Sign in Button
+
+    <style name="Google_Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:text">Sign in with Google</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:drawableLeft">@drawable/ic_google_logo</item>
+        <item name="android:drawableStart">@drawable/ic_google_logo</item>
+        <item name="android:layout_margin">@dimen/_15sdp</item>
+    </style>
+
+    <style name="Card" parent="CardView">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_180sdp</item>
+        <item name="android:layout_margin">@dimen/_10sdp</item>
+       <item name="cardBackgroundColor">@color/colorAccent</item>
+        <item name="cardCornerRadius">@dimen/_7sdp</item>
+        <item name="cardElevation">@dimen/_5sdp</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:text">Arduino</item>
+        <item name="android:textSize">@dimen/_45sdp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

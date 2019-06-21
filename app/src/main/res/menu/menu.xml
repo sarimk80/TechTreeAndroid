@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/arduino"
+        android:title="@string/Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        />
+
+    <item
+        android:id="@+id/projects2"
+        android:title="@string/Projects"
+        android:icon="@drawable/ic_assignment_black_24dp"
+        />
+
+    <item
+        android:id="@+id/bluetooth"
+        android:title="@string/Bluetooth"
+        android:icon="@drawable/ic_bluetooth_black_24dp"
+        />
+</menu>
