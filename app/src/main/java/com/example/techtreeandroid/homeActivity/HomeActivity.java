@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.techtreeandroid.R;
 import com.example.techtreeandroid.databinding.ActivityHomeBinding;
 import com.example.techtreeandroid.log_out.Log_out;
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     private ActivityHomeBinding homeBinding;
+    private FirebaseUser user;
 
 
     @Override
@@ -41,6 +44,14 @@ public class HomeActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_home);
         homeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         bottomNavigationView = findViewById(R.id.nav_bar_btm);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+
+            Glide.with(homeBinding.getRoot()).load(user.getPhotoUrl()).into(homeBinding.imgHolder);
+        } else {
+            homeBinding.imgHolder.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp));
+        }
 
         homeBinding.setEvent(new Event() {
             @Override

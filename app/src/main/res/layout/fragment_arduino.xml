@@ -13,19 +13,8 @@
 
         style="@style/Card">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:gravity="center">
-
-            <TextView
-                style="@style/Text"/>
-        </RelativeLayout>
-
-
+        <TextView style="@style/Text" />
     </androidx.cardview.widget.CardView>
-
 
     <androidx.cardview.widget.CardView style="@style/Card" />
 
