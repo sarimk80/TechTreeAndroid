@@ -15,6 +15,12 @@
         <action
             android:id="@+id/action_arduino_to_bluetooth2"
             app:destination="@id/bluetooth" />
+        <action
+            android:id="@+id/action_arduino_to_ard_Detail"
+            app:destination="@id/ard_Detail" />
+        <action
+            android:id="@+id/action_arduino_to_prod_Deatil"
+            app:destination="@id/prod_Deatil" />
     </fragment>
     <fragment
         android:id="@+id/projects2"
@@ -26,4 +32,14 @@
         android:name="com.example.techtreeandroid.fragments.Bluetooth"
         android:label="fragment_bluetooth"
         tools:layout="@layout/fragment_bluetooth" />
+    <fragment
+        android:id="@+id/ard_Detail"
+        android:name="com.example.techtreeandroid.Ard_Detail"
+        android:label="fragment_ard__detail"
+        tools:layout="@layout/fragment_ard__detail" />
+    <fragment
+        android:id="@+id/prod_Deatil"
+        android:name="com.example.techtreeandroid.Prod_Deatil"
+        android:label="fragment_prod__deatil"
+        tools:layout="@layout/fragment_prod__deatil" />
 </navigation>
