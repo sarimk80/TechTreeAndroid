@@ -7,4 +7,7 @@
     <string name="Home">Home</string>
     <string name="Projects">Projects</string>
     <string name="Bluetooth">Bluetooth</string>
+    <string name="User">User</string>
+
+
 </resources>

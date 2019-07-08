@@ -18,4 +18,10 @@
         android:title="@string/Bluetooth"
         android:icon="@drawable/ic_bluetooth_black_24dp"
         />
+    <item
+        android:id="@+id/user"
+        android:title="@string/User"
+        android:icon="@drawable/ic_person_black_24dp"
+
+        />
 </menu>

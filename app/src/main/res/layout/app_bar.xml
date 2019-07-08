@@ -7,18 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary"
+    android:elevation="@dimen/_5sdp"
     android:gravity="center_vertical"
     app:title="@string/app_name"
-    app:titleTextColor="@color/colorAccent"
-    android:elevation="@dimen/_5sdp">
+    app:titleTextColor="@color/colorAccent">
 
 
-    <ImageView
-        android:id="@+id/img_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="@dimen/_8sdp"
-        android:onClick="@{(v)->event.SignOut()}"
-        />
+
 </androidx.appcompat.widget.Toolbar>
