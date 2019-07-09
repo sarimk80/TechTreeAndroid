@@ -9,6 +9,7 @@
     </style>
 
 
+
     //Google Sign in Button
 
     <style name="Google_Button">
@@ -21,6 +22,18 @@
         <item name="android:drawableLeft">@drawable/ic_google_logo</item>
         <item name="android:drawableStart">@drawable/ic_google_logo</item>
         <item name="android:layout_margin">@dimen/_15sdp</item>
+    </style>
+
+    <style name="SignOut">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:text">Sign Out</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:layout_margin">@dimen/_15sdp</item>
+
+
     </style>
 
     <style name="Card" parent="CardView">
@@ -59,6 +72,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:contentDescription">@string/app_name</item>
+    </style>
+
+    <style name="Image_logo">
+        <item name="android:layout_width">@dimen/_50sdp</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
+        <item name="android:contentDescription">@string/app_name</item>
+        <item name="android:layout_margin">@dimen/_8sdp</item>
     </style>
 
 </resources>

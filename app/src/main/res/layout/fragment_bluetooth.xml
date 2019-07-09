@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.Controller">
 
-    <ListView
-        android:id="@+id/list_item"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="Event"
+            type="com.example.techtreeandroid.fragmentevent.ControllerEvent" />
+
+        <variable
+            name="Model"
+            type="com.example.techtreeandroid.fragmentmodel.ConstrollerModel" />
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        tools:context=".fragments.Controller">
+
+        <ListView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
 
 
-</FrameLayout>
+
+
+    </FrameLayout>
+
+</layout>

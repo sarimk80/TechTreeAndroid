@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +27,15 @@ import com.example.techtreeandroid.fragmentadapter.CustomAdapter;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import me.aflak.bluetooth.Bluetooth;
 import me.aflak.bluetooth.interfaces.BluetoothCallback;
 import me.aflak.bluetooth.interfaces.DeviceCallback;
+import me.aflak.bluetooth.interfaces.DiscoveryCallback;
 
 
 public class Controller extends Fragment {
@@ -36,6 +45,7 @@ public class Controller extends Fragment {
 
     private ListView listView;
     private CustomAdapter adapter;
+    private static final String TAG = "Controller";
 
     public Controller() {
         // Required empty public constructor
@@ -57,6 +67,7 @@ public class Controller extends Fragment {
         bluetooth = new Bluetooth(getContext());
         bluetooth.setBluetoothCallback(bluetoothCallback);
         bluetooth.setDeviceCallback(bluetoothDeviceCallback);
+        bluetooth.setDiscoveryCallback(bluetoothDiscoveryCallback);
 
 
         return view;
@@ -95,7 +106,14 @@ public class Controller extends Fragment {
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             listView.setOnItemClickListener((adapterView, view, position, l) -> {
-                //bluetooth.connectToAddress();
+
+                try {
+                    bluetooth.connectToAddress(bluetooth.getPairedDevices().get(position).getAddress());
+                    Log.d(TAG, "onBluetoothOn: " + bluetooth.getPairedDevices().get(position).getAddress());
+
+                } catch (Exception e) {
+                    Toasty.error(getContext(), "Error " + e, Toast.LENGTH_LONG).show();
+                }
 
             });
 
@@ -137,23 +155,55 @@ public class Controller extends Fragment {
 
         @Override
         public void onError(int errorCode) {
-
+            Toasty.error(Objects.requireNonNull(getContext()), "Cannot connect Device ", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onConnectError(BluetoothDevice device, String message) {
-            Toasty.error(getContext(), "Cannot connect to " + device.getName(), Toast.LENGTH_LONG).show();
+
+            new Handler(Looper.getMainLooper())
+                    .post(() ->
+                            Toasty.error(getContext(),
+                                    "Cannot Connect to " + device, Toast.LENGTH_LONG)
+                                    .show());
+
+
         }
+
     };
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (bluetooth.isEnabled() || bluetooth.isConnected()) {
-            bluetooth.onStop();
-            bluetooth.disable();
+
+    private DiscoveryCallback bluetoothDiscoveryCallback = new DiscoveryCallback() {
+        @Override
+        public void onDiscoveryStarted() {
+
         }
-    }
+
+        @Override
+        public void onDiscoveryFinished() {
+
+        }
+
+        @Override
+        public void onDeviceFound(BluetoothDevice device) {
+
+        }
+
+        @Override
+        public void onDevicePaired(BluetoothDevice device) {
+
+        }
+
+        @Override
+        public void onDeviceUnpaired(BluetoothDevice device) {
+
+        }
+
+        @Override
+        public void onError(int errorCode) {
+            Toasty.error(Objects.requireNonNull(getContext()), "Cannot connect to Device", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onStop() {
@@ -162,13 +212,5 @@ public class Controller extends Fragment {
         bluetooth.disable();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        if (bluetooth.isEnabled() || bluetooth.isConnected()) {
-            bluetooth.onStop();
-            bluetooth.disable();
-        }
 
-    }
 }

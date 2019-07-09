@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_prod__deatil" />
     <fragment
         android:id="@+id/user"
-        android:name="com.example.techtreeandroid.User"
+        android:name="com.example.techtreeandroid.fragments.User"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 </navigation>

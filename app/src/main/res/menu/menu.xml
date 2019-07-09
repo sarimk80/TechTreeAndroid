@@ -4,24 +4,24 @@
     <item
         android:id="@+id/arduino"
         android:title="@string/Home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_home"
         />
 
     <item
         android:id="@+id/projects2"
         android:title="@string/Projects"
-        android:icon="@drawable/ic_assignment_black_24dp"
+        android:icon="@drawable/ic_project"
         />
 
     <item
         android:id="@+id/bluetooth"
         android:title="@string/Bluetooth"
-        android:icon="@drawable/ic_bluetooth_black_24dp"
+        android:icon="@drawable/ic_bluetooth"
         />
     <item
         android:id="@+id/user"
         android:title="@string/User"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/ic_user"
 
         />
 </menu>
