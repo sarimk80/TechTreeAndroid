@@ -1,16 +1,20 @@
 package com.example.techtreeandroid.mainActivity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.techtreeandroid.R;
 import com.example.techtreeandroid.databinding.ActivityMainBinding;
+import com.example.techtreeandroid.di.FireauthComponent;
+import com.example.techtreeandroid.di.baseapplication.BaseApplication;
 import com.example.techtreeandroid.homeActivity.HomeActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import javax.inject.Inject;
+
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +40,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Fire";
     private ActivityMainBinding activityMainBinding;
     private static final int RC_SIGN_IN = 1;
-    private FirebaseAuth mAuth;
+
+    @Inject
+    public FirebaseAuth mAuth;
+
+    @Nullable
+    @Inject
+    public FirebaseUser user;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -44,7 +56,12 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
+        FireauthComponent fireauthComponent = ((BaseApplication) getApplication()).getFireauthComponent();
+
+        fireauthComponent.inject(this);
+
+
+        // mAuth = FirebaseAuth.getInstance();
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("635330782929-o56ifum8ccae7ivvr1bk5k1cbumbtr3b.apps.googleusercontent.com")
@@ -81,7 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
+                //Log.w(TAG, "Google sign in failed", e);
+                Snackbar snackbar = Snackbar.make(activityMainBinding.linearLayout, "Google sign in failed", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+
                 // ...
             }
         }
@@ -93,39 +113,36 @@ public class MainActivity extends AppCompatActivity {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toasty.error(getApplicationContext(), "Sign in Failed", Toast.LENGTH_LONG).show();
-                            updateUI(null);
-                        }
-
-                        // ...
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        Toasty.error(getApplicationContext(), "Sign in Failed", Toast.LENGTH_LONG).show();
+                        updateUI(null);
                     }
+
+                    // ...
                 });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        user = mAuth.getCurrentUser();
+        updateUI(user);
     }
 
 
     private void updateUI(FirebaseUser user) {
 
         if (user != null) {
-            Log.d(TAG, user.getDisplayName() + user.getEmail());
-            Intent intent=new Intent(MainActivity.this, HomeActivity.class);
+            // Log.d(TAG, user.getDisplayName() + user.getEmail());
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
             //Toasty.success(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_LONG).show();

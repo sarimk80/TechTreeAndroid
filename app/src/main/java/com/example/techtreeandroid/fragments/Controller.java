@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 
@@ -46,6 +47,8 @@ public class Controller extends Fragment {
     private ListView listView;
     private CustomAdapter adapter;
     private static final String TAG = "Controller";
+    private AlertDialog.Builder alert;
+    private AlertDialog alertDialog;
 
     public Controller() {
         // Required empty public constructor
@@ -62,6 +65,10 @@ public class Controller extends Fragment {
 
         listView = view.findViewById(R.id.list_item);
         listView.setDividerHeight(2);
+
+        alert = new AlertDialog.Builder(getContext());
+        alert.setMessage("Connecting.....");
+        alert.setIcon(getResources().getDrawable(R.drawable.ic_bluetooth));
 
 
         bluetooth = new Bluetooth(getContext());
@@ -106,14 +113,17 @@ public class Controller extends Fragment {
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             listView.setOnItemClickListener((adapterView, view, position, l) -> {
+                alertDialog = alert.create();
+                alertDialog.show();
 
                 try {
                     bluetooth.connectToAddress(bluetooth.getPairedDevices().get(position).getAddress());
-                    Log.d(TAG, "onBluetoothOn: " + bluetooth.getPairedDevices().get(position).getAddress());
+                    // alertDialog.dismiss();
 
                 } catch (Exception e) {
                     Toasty.error(getContext(), "Error " + e, Toast.LENGTH_LONG).show();
                 }
+
 
             });
 
@@ -140,7 +150,7 @@ public class Controller extends Fragment {
     private DeviceCallback bluetoothDeviceCallback = new DeviceCallback() {
         @Override
         public void onDeviceConnected(BluetoothDevice device) {
-
+            alertDialog.dismiss();
         }
 
         @Override
@@ -163,9 +173,13 @@ public class Controller extends Fragment {
 
             new Handler(Looper.getMainLooper())
                     .post(() ->
-                            Toasty.error(getContext(),
-                                    "Cannot Connect to " + device, Toast.LENGTH_LONG)
-                                    .show());
+
+                    {
+                        Toasty.error(Objects.requireNonNull(getContext()),
+                                "Cannot Connect to " + device, Toast.LENGTH_LONG)
+                                .show();
+                        alertDialog.dismiss();
+                    });
 
 
         }

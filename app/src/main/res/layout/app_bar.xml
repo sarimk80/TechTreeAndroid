@@ -10,6 +10,7 @@
     android:elevation="@dimen/_5sdp"
     android:gravity="center_vertical"
     app:title="@string/app_name"
+
     app:titleTextColor="@color/colorAccent">
 
 

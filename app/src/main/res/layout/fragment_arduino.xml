@@ -34,7 +34,7 @@
                 android:background="@drawable/arduino" />
 
             <TextView
-                style="@style/Text_heading"
+                style="@style/Text_heading_white"
                 android:text="@{Model.title}" />
 
         </androidx.cardview.widget.CardView>
@@ -50,7 +50,7 @@
                 android:background="@drawable/arduino" />
 
             <TextView
-                style="@style/Text_heading"
+                style="@style/Text_heading_white"
                 android:text="@{Model.description}" />
 
         </androidx.cardview.widget.CardView>
