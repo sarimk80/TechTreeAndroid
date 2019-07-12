@@ -7,7 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentController;
 
 
 import android.os.Handler;
@@ -23,7 +25,9 @@ import android.widget.Toast;
 
 
 import com.example.techtreeandroid.R;
+import com.example.techtreeandroid.databinding.FragmentBluetoothBinding;
 import com.example.techtreeandroid.fragmentadapter.CustomAdapter;
+import com.example.techtreeandroid.fragmentmodel.ConstrollerModel;
 
 import java.util.Objects;
 
@@ -44,11 +48,10 @@ public class Controller extends Fragment {
 
     private Bluetooth bluetooth;
 
-    private ListView listView;
+    //private ListView listView;
     private CustomAdapter adapter;
     private static final String TAG = "Controller";
-    private AlertDialog.Builder alert;
-    private AlertDialog alertDialog;
+    private FragmentBluetoothBinding bluetoothBinding;
 
     public Controller() {
         // Required empty public constructor
@@ -60,15 +63,13 @@ public class Controller extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_bluetooth, container, false);
+        bluetoothBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_bluetooth, container, false);
+        //View view = inflater.inflate(R.layout.fragment_bluetooth, container, false);
 
 
-        listView = view.findViewById(R.id.list_item);
-        listView.setDividerHeight(2);
-
-        alert = new AlertDialog.Builder(getContext());
-        alert.setMessage("Connecting.....");
-        alert.setIcon(getResources().getDrawable(R.drawable.ic_bluetooth));
+        //listView = view.findViewById(R.id.list_item);
+        bluetoothBinding.listItem.setDividerHeight(2);
+        //listView.setDividerHeight(2);
 
 
         bluetooth = new Bluetooth(getContext());
@@ -77,7 +78,7 @@ public class Controller extends Fragment {
         bluetooth.setDiscoveryCallback(bluetoothDiscoveryCallback);
 
 
-        return view;
+        return bluetoothBinding.getRoot();
     }
 
     @Override
@@ -110,11 +111,10 @@ public class Controller extends Fragment {
         public void onBluetoothOn() {
 
             adapter = new CustomAdapter(getContext(), bluetooth.getPairedDevices());
-            listView.setAdapter(adapter);
+            bluetoothBinding.listItem.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            listView.setOnItemClickListener((adapterView, view, position, l) -> {
-                alertDialog = alert.create();
-                alertDialog.show();
+            bluetoothBinding.listItem.setOnItemClickListener((adapterView, view, position, l) -> {
+                bluetoothBinding.loading.setVisibility(View.VISIBLE);
 
                 try {
                     bluetooth.connectToAddress(bluetooth.getPairedDevices().get(position).getAddress());
@@ -150,7 +150,15 @@ public class Controller extends Fragment {
     private DeviceCallback bluetoothDeviceCallback = new DeviceCallback() {
         @Override
         public void onDeviceConnected(BluetoothDevice device) {
-            alertDialog.dismiss();
+            Log.d(TAG, "onDeviceConnected: " + device.getName());
+            new Handler(Looper.getMainLooper()).post(() -> {
+                bluetoothBinding.listItem.setVisibility(View.GONE);
+                bluetoothBinding.loading.setVisibility(View.GONE);
+                bluetoothBinding.setModel(new ConstrollerModel(device.getAddress(),
+                        device.getName(), String.valueOf(device.getBondState())));
+            });
+
+            // bluetooth.send("s");
         }
 
         @Override
@@ -176,9 +184,10 @@ public class Controller extends Fragment {
 
                     {
                         Toasty.error(Objects.requireNonNull(getContext()),
-                                "Cannot Connect to " + device, Toast.LENGTH_LONG)
+                                "Cannot Connect to " + device.getName(), Toast.LENGTH_LONG)
                                 .show();
-                        alertDialog.dismiss();
+                        bluetoothBinding.loading.setVisibility(View.GONE);
+
                     });
 
 

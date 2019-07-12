@@ -23,6 +23,7 @@
 
 
         <TextView
+            android:id="@+id/textView"
             style="@style/Text_heading"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -59,9 +60,9 @@
 
         <ImageView
             style="@style/arrow_btn"
-            android:rotation="270"
-            android:onClick="@{(v)->Event.Right()}"
             android:contentDescription="@string/app_name"
+            android:onClick="@{(v)->Event.Right()}"
+            android:rotation="270"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.7"
@@ -69,10 +70,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:onClick="@{(v)->Event.Forward()}"
+            android:id="@+id/imageView"
             style="@style/arrow_btn"
-            android:rotation="180"
             android:contentDescription="@string/app_name"
+            android:onClick="@{(v)->Event.Forward()}"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +82,10 @@
             app:layout_constraintVertical_bias="0.4" />
 
         <ImageView
-            android:onClick="@{(v)->Event.Left()}"
             style="@style/arrow_btn"
-            android:rotation="90"
             android:contentDescription="@string/app_name"
+            android:onClick="@{(v)->Event.Left()}"
+            android:rotation="90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"
@@ -91,15 +93,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:onClick="@{(v)->Event.Backward()}"
+            android:id="@+id/imageView2"
             style="@style/arrow_btn"
-            android:rotation="360"
             android:contentDescription="@string/app_name"
+            android:onClick="@{(v)->Event.Backward()}"
+            android:rotation="360"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/list_item"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="qimtronics.json"
+            app:lottie_loop="true" />
 
         <ListView
             android:id="@+id/list_item"
@@ -110,11 +130,12 @@
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             android:background="@android:color/white"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

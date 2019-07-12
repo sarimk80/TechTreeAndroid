@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.techtreeandroid.R;
 import com.example.techtreeandroid.databinding.ActivityMainBinding;
+
+
 import com.example.techtreeandroid.di.FireauthComponent;
 import com.example.techtreeandroid.di.baseapplication.BaseApplication;
 import com.example.techtreeandroid.homeActivity.HomeActivity;
@@ -48,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     public FirebaseUser user;
 
-    private GoogleSignInClient mGoogleSignInClient;
+
+    public GoogleSignInOptions gso;
+
+
+    public GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +62,16 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+
         FireauthComponent fireauthComponent = ((BaseApplication) getApplication()).getFireauthComponent();
+
 
         fireauthComponent.inject(this);
 
 
         // mAuth = FirebaseAuth.getInstance();
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("635330782929-o56ifum8ccae7ivvr1bk5k1cbumbtr3b.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
