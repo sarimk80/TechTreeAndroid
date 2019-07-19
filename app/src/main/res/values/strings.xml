@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">Tech Tree</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Content">Hello blank fragment</string>
 
     <string name="Home">Home</string>
     <string name="Projects">Projects</string>
     <string name="Bluetooth">Bluetooth</string>
     <string name="User">User</string>
+
+    <string name="Title">Title</string>
+    <string name="Details">Details</string>
 
 
 </resources>
