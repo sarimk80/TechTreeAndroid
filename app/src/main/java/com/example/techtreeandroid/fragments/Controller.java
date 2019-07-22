@@ -106,6 +106,48 @@ public class Controller extends Fragment {
             return false;
         });
 
+        bluetoothBinding.imgBack.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    bluetooth.send("B");
+                    break;
+                }
+                case MotionEvent.ACTION_UP: {
+                    bluetooth.send("S");
+                    break;
+                }
+            }
+            return false;
+        });
+
+        bluetoothBinding.imgLeft.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    bluetooth.send("L");
+                    break;
+                case MotionEvent.ACTION_UP:
+                    bluetooth.send("S");
+                    break;
+            }
+            return false;
+        });
+
+
+        bluetoothBinding.imgRight.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    bluetooth.send("R");
+                    break;
+                case MotionEvent.ACTION_UP:
+                    bluetooth.send("S");
+                    break;
+            }
+
+            return false;
+        });
+
     }
 
 
