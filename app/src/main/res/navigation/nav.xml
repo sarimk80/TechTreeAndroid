@@ -6,7 +6,7 @@
     app:startDestination="@id/arduino">
     <fragment
         android:id="@+id/arduino"
-        android:name="com.example.techtreeandroid.fragments.Arduino"
+        android:name="com.tree.techtreeandroid.fragments.Arduino"
         android:label="fragment_arduino"
         tools:layout="@layout/fragment_arduino" >
         <action
@@ -27,27 +27,27 @@
     </fragment>
     <fragment
         android:id="@+id/projects2"
-        android:name="com.example.techtreeandroid.fragments.Projects"
+        android:name="com.tree.techtreeandroid.fragments.Projects"
         android:label="fragment_projects"
         tools:layout="@layout/fragment_projects" />
     <fragment
         android:id="@+id/bluetooth"
-        android:name="com.example.techtreeandroid.fragments.Controller"
+        android:name="com.tree.techtreeandroid.fragments.Controller"
         android:label="fragment_bluetooth"
         tools:layout="@layout/fragment_bluetooth" />
     <fragment
         android:id="@+id/ard_Detail"
-        android:name="com.example.techtreeandroid.Ard_Detail"
+        android:name="com.tree.techtreeandroid.Ard_Detail"
         android:label="fragment_ard__detail"
         tools:layout="@layout/fragment_ard__detail" />
     <fragment
         android:id="@+id/prod_Deatil"
-        android:name="com.example.techtreeandroid.Prod_Deatil"
+        android:name="com.tree.techtreeandroid.Prod_Deatil"
         android:label="fragment_prod__deatil"
         tools:layout="@layout/fragment_prod__deatil" />
     <fragment
         android:id="@+id/user"
-        android:name="com.example.techtreeandroid.fragments.User"
+        android:name="com.tree.techtreeandroid.fragments.User"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 </navigation>

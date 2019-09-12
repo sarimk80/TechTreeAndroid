@@ -6,11 +6,11 @@
 
         <variable
             name="Event"
-            type="com.example.techtreeandroid.fragmentevent.UserEvent" />
+            type="com.tree.techtreeandroid.fragmentevent.UserEvent" />
 
         <variable
             name="User"
-            type="com.example.techtreeandroid.fragmentmodel.UserModel" />
+            type="com.tree.techtreeandroid.fragmentmodel.UserModel" />
     </data>
 
 

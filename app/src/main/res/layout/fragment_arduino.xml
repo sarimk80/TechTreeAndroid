@@ -5,11 +5,11 @@
 
         <variable
             name="Model"
-            type="com.example.techtreeandroid.fragmentmodel.ArduinoModel" />
+            type="com.tree.techtreeandroid.fragmentmodel.ArduinoModel" />
 
         <variable
             name="Event"
-            type="com.example.techtreeandroid.fragmentevent.ArduinoEvent" />
+            type="com.tree.techtreeandroid.fragmentevent.ArduinoEvent" />
     </data>
 
 
