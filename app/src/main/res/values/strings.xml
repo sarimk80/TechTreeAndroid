@@ -12,5 +12,27 @@
     <string name="Title">Title</string>
     <string name="Details">Details</string>
 
+    <!--Arduino Detail Strings-->
+    <string name="Arduino">Arduino is an open-source electronics platform based on easy-to-use hardware and software. Arduino boards are able to read inputs - light on a sensor, a finger on a button, or a Twitter message - and turn it into an output - activating a motor, turning on an LED, publishing something online.</string>
+
+    <string name="PowerJack">You can also power the Arduino board via the DC power jack. The power jack is 2.1mm center powered. You can use between 7V and 12V DC to power the board. </string>
+
+
+    <string name="DigitalIO">There are 16 digital pins on the Arduino board. They can be used as inputs or outputs. They operate at 5V and have a maximum current draw of 40mA. We can control the digital I/O pins using the pinmode(), digitalWrite() and digitalRead functions.</string>
+
+    <string name="MicroController">At the heart of Arduino lies a microcontroller chip (ATMEGA328P in case of Arduino UNO). These chips are a digital brain which makes them smart enough to take decision according to the surrounding. </string>
+
+    <string name="UsbTypeB">The Arduino Uno uses an onboard ATmega16U2 to connect the serial TX and RX pins on the ATmega 328. The 16u2 replaces the FTTI usb chip used on other boards. This serial data is sent out by the USB chip to appear as a virtual com port on the computer connected to the USB port.</string>
+
+    <string name="AnalogIO">Analog pins are the ADC (analog to digital converter) input pins. The signals from sensors that measure surrounding natural factors such as temperature, or pressure, are often analog signals. They are used for reading analog voltage between 0–5V on Arduino.</string>
+
+    <string name="Reset">In electronics and technology, a reset button is a button that can reset the device. In Arduino Uno, the reset button restarts the code or program from the very beginning of it.</string>
+
+    <string name="PowerPins">Vin- is the Voltage In pin. The input voltage to the Arduino board, can be used for powering up the Arduino.
+5 Volt Power Pin- This power can be utilized to power up the components that requires 5 voltages to operate.
+3.3 Volt Power In- This power pin can be utilized to power up the components that requires 3.3 voltages to operate.
+GND- is the Ground pins which refers to the negative voltages.
+</string>
+
 
 </resources>

@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_bluetooth" />
     <fragment
         android:id="@+id/ard_Detail"
-        android:name="com.tree.techtreeandroid.Ard_Detail"
+        android:name="com.tree.techtreeandroid.arduinodetails.Ard_Detail"
         android:label="fragment_ard__detail"
         tools:layout="@layout/fragment_ard__detail" />
     <fragment
